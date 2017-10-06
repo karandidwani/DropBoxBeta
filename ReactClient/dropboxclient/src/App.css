@@ -1,0 +1,44 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+    width: 200px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+.signinImage {
+
+}
+
+input[type=text] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+
+.App-header {
+  background-color: white;
+  height: 70px;
+  padding: 20px;
+  color: white;
+  border-bottom: groove;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+    column-count: 2;
+}
+
