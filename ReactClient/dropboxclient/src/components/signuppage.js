@@ -7,14 +7,28 @@ import './style.css';
 class SignUp extends React.Component {
 
     state = {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: ''
-    };
+        userdata :{
+            firstname: '',
+            lastname: '',
+            email: '',
+            password: ''
+            },
+        success : false,
+        message : ''
+        };
 
-    handleSignUp = (userdata) => {
-
+    handleSignUp = (signupdata) => {
+        API.doSignUp(this.state.userdata)
+            .then((status) => {
+                if(status == 201){
+                    this.props.history.push("/home");
+                }
+                else if (status == 401){
+                    this.setState({
+                        message : 'Signup failed. Please try again'
+                    })
+                }
+            })
     };
 
 
@@ -50,37 +64,41 @@ class SignUp extends React.Component {
                                                              })
                                                          }} /><br /><br />
                                                              </td>
-                                                             </tr>
-                                                             <tr>
-                                                             <td>
-                                                             <input type="text" placeholder="email"/><br /><br />
-                                                             </td>
-                                                             </tr>
-                                                             <tr>
-                                                             <td>
-                                                             <input type="text" placeholder="password"/><br /><br />
-                                                             </td>
-                                                             </tr>
-                                                             <tr>
-                                                             <td>
-                                                             <input type="checkbox" />I agree to <a href="#" >DropBox Terms</a>&nbsp;&nbsp; <button className="loginsignup" onClick={()=>{this.props.history.push("/signup") }} >Create an account</button> <br /><br />
-
-                                                             </td>
-                                                             </tr>
-                                                             </tbody>
-                                                             </table>
-                                                             </span>
-                                                             </p>
-                                                             </div>
-                                                             )}/>
-                <Route exact path='/signup' render{() => (
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="email" placeholder="email"/><br /><br />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="password" placeholder="password"/><br /><br />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" />I agree to <a href="#" >DropBox Terms</a>&nbsp;&nbsp;
+                                                    <button className="loginsignup"
+                                                            onClick={()=>{
+                                                                this.handleSignUp(signupdata)
+                                                                 }} >Create an account
+                                                    </button>
+                                                    <br /><br />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            </span>
+                        </p>
+                    </div>
+                )}/>
+                <Route exact path='/home' render{() => (
                     <div>
-                        <SignUp handleSignUp={this.handleSignUp}/>
+                        <Home />
                     </div>
                 )}/>
                     </div>
-                    )
-                    }
-                }
+                )}
+}
 
-                export default SignUp;
+export default SignUp;
