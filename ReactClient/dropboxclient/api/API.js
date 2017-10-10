@@ -15,6 +15,6 @@ export const doSignUp = (payload) =>
     }).then(res => {
         return res.status;
     }).catch(error => {
-        console.log("This is error");
+        console.log("This is error, check in API.js");
         return error;
     });

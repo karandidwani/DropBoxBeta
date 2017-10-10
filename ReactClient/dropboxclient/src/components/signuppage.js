@@ -1,7 +1,8 @@
 import React from 'react';
+import {Route} from 'react-router-dom';
+
 import logo from '../logo.png';
 import signin from '../signin.png';
-import {Route} from 'react-router-dom';
 import './style.css';
 
 class SignUp extends React.Component {
@@ -18,6 +19,10 @@ class SignUp extends React.Component {
         };
 
     handleSignUp = (signupdata) => {
+        const signupdata = signupdata;
+        console.log("\n this.state: "+this.state+"\n this.signupdata: "+this.signupdata );
+        console.log("this.state.userdata: "+this.state.userdata);
+
         API.doSignUp(this.state.userdata)
             .then((status) => {
                 if(status == 201){
@@ -52,27 +57,55 @@ class SignUp extends React.Component {
                                         <tbody>
                                             <tr>
                                                 <td>
-                                                    <input type="text" placeholder="FirstName"/><br/><br/>
+                                                    <input type="text" value={this.state.userdata.firstname} placeholder="FirstName"
+                                                            onChange = {(event)=> {
+                                                                this.setState({
+                                                                    userdata : {
+                                                                        ...this.state.userdata,
+                                                                        firstname : event.target.value
+                                                                    }
+                                                                })
+                                                            }} /><br/><br/>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                  <input type="text" value={this.state.username} placeholder="LastName"
-                                                         onChange={(event) => {
+                                                  <input type="text" value={this.state.userdata.lastname} placeholder="LastName"
+                                                         onChange= { (event) => {
                                                              this.setState({
-                                                                 lastname: event.target.value
+                                                                 userdata : {
+                                                                     ...this.state.userdata,
+                                                                     lastname : event.target.value
+                                                                 }
                                                              })
+
                                                          }} /><br /><br />
                                                              </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="email" placeholder="email"/><br /><br />
+                                                    <input type="email" value={this.state.userdata.email} placeholder="email"
+                                                           onClick={ (event) => {
+                                                               this.setState( {
+                                                                   userdata : {
+                                                                       ...this.state.userdata,
+                                                                       email : event.target.value
+                                                                   }
+                                                               })
+                                                           }} /><br /><br />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input type="password" placeholder="password"/><br /><br />
+                                                    <input type="password" value={this.state.userdata.password} placeholder="password"
+                                                    onChange={ (event) => {
+                                                        this.setState({
+                                                            userdata : {
+                                                                ...this.state.userdata,
+                                                                password : event.target.password
+                                                            }
+                                                        })
+                                                    } } /><br /><br />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -80,7 +113,7 @@ class SignUp extends React.Component {
                                                     <input type="checkbox" />I agree to <a href="#" >DropBox Terms</a>&nbsp;&nbsp;
                                                     <button className="loginsignup"
                                                             onClick={()=>{
-                                                                this.handleSignUp(signupdata)
+                                                                this.handleSignUp(this.state)
                                                                  }} >Create an account
                                                     </button>
                                                     <br /><br />

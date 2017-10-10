@@ -1,12 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
-router.post('/signup', function (req, res, next) {
+router.post('/doSignUp', function (req, res, next) {
 
     var firstname = req.body.username;
     var lastname = req.body.password;
